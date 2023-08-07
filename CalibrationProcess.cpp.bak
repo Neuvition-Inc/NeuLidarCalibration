@@ -1,0 +1,370 @@
+#include "CalibrationProcess.h"
+
+
+
+CalibrationProcess::CalibrationProcess()
+{
+	depthCount = 0;
+	memset(&lidarSerialNumber, 0, 32);
+	memset(&depthDataNodes[0], 0, sizeof(DepthDataNode) * 30);
+}
+
+CalibrationProcess::~CalibrationProcess()
+{
+	if (ofStream.is_open()) {
+		ofStream.close();
+	}
+}
+
+QString CalibrationProcess::GetDeviceName() {
+	int mDeviceType = neuvition::get_device_type();
+	QString device_type;
+	switch (mDeviceType) {
+	case 0: {
+		device_type.append("Titan M1");
+		break;
+	}
+	case 1: {
+		device_type.append("Titan M1-Pro");
+		break;
+	}
+	case 2: {
+		device_type.append("Titan M1-Plus");
+		break;
+	}
+	case 3: {
+		device_type.append("Titan M1-R");
+		break;
+	}
+	case 4: {
+		device_type.append("Titan S1");
+		break;
+	}
+	case 5: {
+		device_type.append("Titan M1-A");
+		break;
+	}
+	case 6: {
+		device_type.append("TItan M1-SL");
+		break;
+	}
+	case 8: {
+		device_type.append("TItan M1-M");
+		break;
+	}
+	default: {
+		device_type.append("Initial");
+		break;
+	}
+	}
+	return  device_type;
+}
+
+void CalibrationProcess::GetSerialNumber(const char* serialNumber) {
+	if(serialNumber)
+	  strcpy(lidarSerialNumber, serialNumber);
+}
+
+bool CalibrationProcess::CreateCalibrationLog(const char *fileName) {
+	QString workPath, calibrateFolderPath, calibratePath;
+	QDir dir;
+	QDateTime current;
+	QString snow;
+	workPath = QApplication::applicationDirPath();
+	calibrateFolderPath.append(workPath).append("/calibration/").append(lidarSerialNumber).append("/");
+	std::cout << "CreateCalibrationLog:" << calibrateFolderPath.toStdString() << std::endl;
+	if (!strcmp(lidarSerialNumber, "")) {
+		std::cout << " error, serialNumber is empty." << std::endl;
+		return false;
+	}
+	if (!dir.exists(calibrateFolderPath)) {
+		dir.mkpath(calibrateFolderPath);
+	}
+	if (ofStream.is_open()) {
+		ofStream.close();
+	}
+	current = QDateTime::currentDateTime();
+	snow = current.toString("yyyyMMdd");
+	calibratePath.append(calibrateFolderPath).append(fileName).append(snow).append(".log");
+	ofStream.open(calibratePath.toStdString(), ios::out | ios::app);
+	return true;
+}
+
+bool CalibrationProcess::OriginCorrection(const neuvition::NeuvUnits& points) {
+	QDateTime current;
+	QString dataTime;
+	bool IsCreateLogFile;
+	int cloudSize, n;
+	int i, index;
+	int row, col;
+	int x, y, z;
+	int avgx, avgy, avgz;
+	float radx, rady, radz;
+	Vec3f eulerAnglesVec3f;
+	char deviceParams[256] = { 0 };
+	vector<float>  planeZVector;
+	Vec3f srcNormal, dstNormal, crossNormal;
+
+	cv::Mat planeCoeffMat(3, 1, CV_64F, cv::Scalar(0));
+	cv::Mat rotationNormalMat(3, 1, CV_32F, cv::Scalar(0));
+	cv::Mat rpMat(3, 1, CV_32F, cv::Scalar(0));
+	cv::Mat pointMat(3, 1, CV_32F, cv::Scalar(0));
+	cv::Mat rotationMat(3, 3, CV_32F, cv::Scalar(0));
+	boost::shared_ptr<CAlgorithm> pCAlgorithm(new CAlgorithm);
+
+	pcl::visualization::PCLVisualizer::Ptr viewer(new pcl::visualization::PCLVisualizer);
+	PointCloud<PointXYZRGBL>::Ptr kdtreeCloud(new PointCloud<PointXYZRGBL>);
+	PointCloud<PointXYZRGBL>::Ptr clusterCloud(new PointCloud<PointXYZRGBL>);
+	PointCloud<PointXYZRGBL>::Ptr sortZCloud(new PointCloud<PointXYZRGBL>);
+	PointCloud<PointXYZRGBL>::Ptr planeCloud(new PointCloud<PointXYZRGBL>);
+	PointCloud<PointXYZRGBL>::Ptr rPlaneCloud(new PointCloud<PointXYZRGBL>);
+
+	bool originCorEnabled;
+	cv::Mat originCorMat;
+	QString calibrationFilePath;
+	calibrationFilePath = QApplication::applicationDirPath();
+	calibrationFilePath.append("/calibration/").append(lidarSerialNumber).append("/c_config_params.json");
+
+	neuvition::get_calibration_params(CAL_ORIGIN_COR, originCorEnabled, originCorMat);
+
+	viewer->addCoordinateSystem();
+	viewer->initCameraParameters();
+
+	IsCreateLogFile = CreateCalibrationLog("OriginCorrection");
+	if (!IsCreateLogFile) {
+		std::cout << " Create Log File is Failed." << std::endl;
+		return false;
+	}
+	current = QDateTime::currentDateTime();
+	dataTime = current.toString("yyyyMMddhhmmss");
+	sprintf(deviceParams, "%s\t%s\n", GetDeviceName().toStdString().c_str(), dataTime.toStdString().c_str());
+	ofStream.write(deviceParams, strlen(deviceParams));
+
+	cloudSize = points.size();
+	if (cloudSize <= 0) {
+		ofStream << " points size: " << cloudSize << std::endl;
+		ofStream.close();
+		return false;
+	}
+
+	index = 0;
+	for (i = 0; i < cloudSize; i++) {
+		const neuvition::NeuvUnit& pt = points.at(i);
+		PointXYZRGBL ptl;
+		ptl.x = pt.x / 1000.0; ptl.y = pt.y / 1000.0; ptl.z = pt.z / 1000.0;
+		ptl.r = pt.r; ptl.g = pt.g; ptl.b = pt.b;
+		ptl.label = i;
+		if (ptl.x < 0.05 && ptl.x > -0.05 && ptl.y < 0.05 && ptl.y > -0.05) {
+			index = ptl.label;
+		}
+		kdtreeCloud->push_back(ptl);
+	}
+	pCAlgorithm->kdtree_create(kdtreeCloud);
+	pCAlgorithm->cloud_cluster_by_distance((PointCloud<PointXYZRGBL> *)kdtreeCloud.get(), index, 0.05, *clusterCloud);
+
+	n = 0;
+	avgx = 0; avgy = 0; avgz = 0;
+	cloudSize = clusterCloud->size();
+	for (PointCloud<PointXYZRGBL>::const_iterator iter = clusterCloud->begin(); iter != clusterCloud->end(); iter++) {
+		const PointXYZRGBL& pt = *iter;
+		int index = lower_bound(planeZVector.begin(), planeZVector.end(), pt.z) - planeZVector.begin();
+		planeZVector.insert(planeZVector.begin() + index, pt.z);
+		sortZCloud->insert(sortZCloud->begin() + index, pt);
+	}
+	for (i = sortZCloud->size() * 0.1; i <= sortZCloud->size() * 0.9; i++) {
+		const PointXYZRGBL& pt = sortZCloud->points[i];
+		planeCloud->push_back(pt);
+	}
+	pCAlgorithm->plane_fitting2(*planeCloud, planeCoeffMat);
+	srcNormal[0] = planeCoeffMat.at<double>(0, 0);
+	srcNormal[1] = planeCoeffMat.at<double>(1, 0);
+	srcNormal[2] = -1;
+	dstNormal[0] = 0;
+	dstNormal[1] = 0;
+	dstNormal[2] = -1;
+	crossNormal = srcNormal.cross(dstNormal);
+	ofStream << "srcNormal= " << srcNormal << std::endl;
+	ofStream << "dstNormal= " << dstNormal << std::endl;
+	ofStream << "crossNormal= " << crossNormal << std::endl;
+	rotationNormalMat.at<float>(0, 0) = crossNormal[0];
+	rotationNormalMat.at<float>(1, 0) = crossNormal[1];
+	rotationNormalMat.at<float>(2, 0) = crossNormal[2];
+	cv::Rodrigues(rotationNormalMat, rotationMat);
+	ofStream << "rotationMat= " << rotationMat << std::endl;
+	for (PointCloud<PointXYZRGBL>::const_iterator iter = planeCloud->begin(); iter != planeCloud->end(); iter++) {
+		const PointXYZRGBL &pt = *iter;
+		PointXYZRGBL rpt = pt;
+		pointMat.at<float>(0, 0) = pt.x;
+		pointMat.at<float>(1, 0) = pt.y;
+		pointMat.at<float>(2, 0) = pt.z;
+		rpMat = rotationMat * pointMat;
+		rpt.x = rpMat.at<float>(0, 0);
+		rpt.y = rpMat.at<float>(1, 0);
+		rpt.z = rpMat.at<float>(2, 0);
+		rpt.r = 255; rpt.g = 0; rpt.b = 0;
+		rPlaneCloud->push_back(rpt);
+	}
+	Vec3f eulerAngles = pCAlgorithm->rotationMatrixToEulerAngles(rotationMat);
+	ofStream << "eulerAngles= " << eulerAngles << std::endl;
+	//viewer->addPointCloud<PointXYZRGBL>(planeCloud, "planeCloud");
+	//viewer->addPointCloud<PointXYZRGBL>(rPlaneCloud, "rPlaneCloud");
+	//viewer->spin();
+	if (ofStream.is_open()) {
+		ofStream.close();
+	}
+	originCorEnabled = true;
+	originCorMat = rotationMat;
+	neuvition::set_calibration_params(CAL_ORIGIN_COR, originCorEnabled, originCorMat);
+	neuvition::set_calibration_params_by_http_json("192.168.1.101", calibrationFilePath.toStdString().c_str());
+	neuvition::set_c_pos_cor_enabled(true);
+	return true;
+}
+
+int CalibrationProcess::DepthCollection(const neuvition::NeuvUnits& points, int laserDepth) {
+	const double lightspeed = 0.2995528160;
+
+	QDateTime current;
+	QString dataTime;
+	bool IsCreateLogFile;
+	int cloudSize, n;
+	int i, row, col;
+	uint8_t lid;
+	int avgz;
+	int x, y, z;
+	
+
+	IsCreateLogFile = CreateCalibrationLog("DepthCorrection");
+	if (!IsCreateLogFile) {
+		std::cout << " Create Log File is Failed." << std::endl;
+		return false;
+	}
+	
+	cloudSize = points.size();
+	if (cloudSize <= 0) {
+		ofStream << " points size: " << cloudSize << std::endl;
+		ofStream.close();
+		return false;
+	}
+	n = 0;
+	avgz = 0;
+	lid = points.at(0).lid;
+	row = 0;
+	col = 0;
+	for (i = 0; i < cloudSize; i++) {
+		const neuvition::NeuvUnit & pt = points.at(i);
+		x = pt.x;
+		y = pt.y;
+		z = pt.z;
+		if (x >= -100 && x <= 100 && y >= -100 && y <= 100) {
+			avgz += z;
+			row += pt.row;
+			col += pt.col;
+			n++;
+		}
+	}
+	if (n <= 0) {
+		ofStream << " search point size is empty." << std::endl;
+		ofStream.close();
+		return false;
+	}
+	avgz /= n;
+	row /= n;
+	col /= n;
+	if (depthCount < 30) {
+		depthDataNodes[depthCount].laserId = points.at(0).lid;
+		depthDataNodes[depthCount].lidarDepth = avgz;
+		depthDataNodes[depthCount].laserDepth = laserDepth;
+		//depthDataNodes[depthCount].lidarDepth = avgz * 2 / lightspeed / neuvition::get_matrix_data(lid, col, row, 2);
+		//depthDataNodes[depthCount].laserDepth = laserDepth * 2 / lightspeed / neuvition::get_matrix_data(lid, col, row, 2);	
+		ofStream << " depthCount= " << depthCount << " row= " << row << " col= " << col <<" avgz= " << avgz << " avgtof = "<< depthDataNodes[depthCount].lidarDepth 
+			<< " laserDepthTof= " << depthDataNodes[depthCount].laserDepth << " laserDepth= " << laserDepth << std::endl;
+		depthCount++;
+	}
+	if (ofStream.is_open()) {
+		ofStream.close();
+	}
+	return true;
+}
+
+bool CalibrationProcess::DepthCorrection() {
+	const double lightspeed = 0.2995528160;
+
+	bool IsCalibrationSucceed;
+	QDateTime current;
+	QString dataTime;
+	bool IsCreateLogFile;
+	int i;
+	int lidarDepth, laserDepth;
+	std::vector<double> lidarDepthVec;
+	std::vector<double> diffDepthVec;
+	cv::Mat linearMat(2, 1, CV_64F, cv::Scalar(0));
+	char deviceParams[256] = { 0 };
+	int maxDiffDepth = INT_MIN;
+
+	boost::shared_ptr<CAlgorithm> pCAlgorithm(new CAlgorithm);
+
+	bool depthZCorEnabled;
+	cv::Mat depthZCorMat;
+	QString calibrationFilePath;
+	calibrationFilePath = QApplication::applicationDirPath();
+	calibrationFilePath.append("/calibration/").append(lidarSerialNumber).append("/c_config_params.json");
+
+	neuvition::get_calibration_params(CAL_DEPTH_Z_COR, depthZCorEnabled, depthZCorMat);
+
+	IsCalibrationSucceed = false;
+	IsCreateLogFile = CreateCalibrationLog("DepthCorrection");
+	if (!IsCreateLogFile) {
+		std::cout << " Create Log File is Failed." << std::endl;
+		IsCalibrationSucceed = false;
+		goto end;
+	}
+	current = QDateTime::currentDateTime();
+	dataTime = current.toString("yyyyMMddhhmmss");
+	sprintf(deviceParams, "%s\t%s\n", GetDeviceName().toStdString().c_str(), dataTime.toStdString().c_str());
+	ofStream.write(deviceParams, strlen(deviceParams));
+
+	if (depthCount < 3) {
+		ofStream << "depthCount less than 3. " << std::endl;
+		IsCalibrationSucceed = false;
+		goto end;
+	}
+	for (i = 0; i < depthCount; i++) {
+		lidarDepth = depthDataNodes[i].lidarDepth;
+		laserDepth = depthDataNodes[i].laserDepth;
+		lidarDepthVec.push_back(lidarDepth);
+		diffDepthVec.push_back(laserDepth - lidarDepth);
+	}
+	pCAlgorithm->curve_fitting(lidarDepthVec, diffDepthVec, linearMat, 1);
+	ofStream << " linearMat: " << linearMat << std::endl;
+	for (i = 0; i < depthCount; ++i)
+	{
+		lidarDepth = depthDataNodes[i].lidarDepth;
+		laserDepth = depthDataNodes[i].laserDepth;
+		int improLidarDepth = lidarDepth + linearMat.at<double>(0, 0) * lidarDepth + linearMat.at<double>(1, 0);
+		int diffDepth = abs(laserDepth - improLidarDepth);
+		if (diffDepth > maxDiffDepth) {
+			maxDiffDepth = diffDepth;
+		}
+	}
+	if (maxDiffDepth > 30) {
+		ofStream << "failed, maxDiffDepth= " << maxDiffDepth << std::endl;
+		IsCalibrationSucceed = false;
+		goto end;
+	}
+	IsCalibrationSucceed = true;
+	depthZCorMat.at<float>(depthDataNodes[0].laserId - 1, 1) = (float)linearMat.at<double>(0, 0);
+	depthZCorMat.at<float>(depthDataNodes[0].laserId - 1, 2) = (float)linearMat.at<double>(1, 0);
+
+end:
+	depthCount = 0;
+	memset(&depthDataNodes[0], 0, sizeof(DepthDataNode) * 30);
+	if (ofStream.is_open()) {
+		ofStream.close();
+	}
+	if (IsCalibrationSucceed) {
+		depthZCorEnabled = true;
+		neuvition::set_calibration_params(CAL_DEPTH_Z_COR, depthZCorEnabled, depthZCorMat);
+		neuvition::set_calibration_params_by_http_json("192.168.1.101", calibrationFilePath.toStdString().c_str());
+	}
+	return IsCalibrationSucceed;
+}

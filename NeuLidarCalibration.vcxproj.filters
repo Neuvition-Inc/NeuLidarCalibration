@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{1a9844a7-d291-4976-8edb-6de7a7a82492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{f27be20d-39c1-4f3f-a637-1104f7a2a084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Common\VTKModule">
+      <UniqueIdentifier>{ae606c91-c0aa-4cf1-9285-853b509ea011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common\VTKModule">
+      <UniqueIdentifier>{c612fba7-75fc-4f45-b293-a5d3b7af14bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Common\LidarModule">
+      <UniqueIdentifier>{c9e1c08c-ae7e-43de-a243-85c7170a445d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common\LidarModule">
+      <UniqueIdentifier>{ec44f5c6-2f9e-40da-b634-0f73a274a876}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PTZModule\CNeuPTZCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PTZModule\CPTZBaseController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PTZModule\CPTZBasePanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PTZModule\CPTZConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PTZModule\CPTZCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PTZModule\CPTZUdpCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LaserInstrumentControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuvition_Auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialPort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SlideControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\VTKModule\CPCLPainter.cpp">
+      <Filter>Source Files\Common\VTKModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\VTKModule\CVTKWidget.cpp">
+      <Filter>Source Files\Common\VTKModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\VTKModule\pcl_extern_func.cpp">
+      <Filter>Source Files\Common\VTKModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\CGlobalSignalSlot.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\CViewController.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LidarModule\CLidarINeuvEvent.cpp">
+      <Filter>Source Files\Common\LidarModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LidarModule\CMatObserver.cpp">
+      <Filter>Source Files\Common\LidarModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LidarModule\CMatSubject.cpp">
+      <Filter>Source Files\Common\LidarModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LidarModule\CNeuvLidarControl.cpp">
+      <Filter>Source Files\Common\LidarModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LidarModule\CNeuvSubject.cpp">
+      <Filter>Source Files\Common\LidarModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LidarModule\globalLidarCallbackFun.cpp">
+      <Filter>Source Files\Common\LidarModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LidarModule\lidar_common_defs.cpp">
+      <Filter>Source Files\Common\LidarModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LidarModule\Subject.cpp">
+      <Filter>Source Files\Common\LidarModule</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CalibrationProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CalibrationAlgorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="PTZModule\CNeuPTZCore.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PTZModule\CPTZBaseController.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PTZModule\CPTZBasePanel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PTZModule\CPTZConfig.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PTZModule\CPTZCore.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="PTZModule\CPTZStateManage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="PTZModule\CPTZUdpCore.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="LaserInstrumentControl.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Neuvition_Auto.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SerialPort.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SlideControl.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\CGlobalSignalSlot.h">
+      <Filter>Header Files\Common</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\VTKModule\CVTKWidget.h">
+      <Filter>Header Files\Common\VTKModule</Filter>
+    </QtMoc>
+    <QtMoc Include="Common\LidarModule\lidar_common_defs.h">
+      <Filter>Header Files\Common\LidarModule</Filter>
+    </QtMoc>
+    <QtMoc Include="MainWin.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="test.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="test.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Common\VTKModule\CVTKWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="MainWin.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\boost_common_defs.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\opencv_common_defs.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\pcl_common_defs.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\VTKModule\CPCLPainter.h">
+      <Filter>Header Files\Common\VTKModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\VTKModule\pcl_extern_func.h">
+      <Filter>Header Files\Common\VTKModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\CViewController.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\LidarModule\CLidarINeuvEvent.h">
+      <Filter>Header Files\Common\LidarModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\LidarModule\CMatObserver.h">
+      <Filter>Header Files\Common\LidarModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\LidarModule\CMatSubject.h">
+      <Filter>Header Files\Common\LidarModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\LidarModule\CNeuvLidarControl.h">
+      <Filter>Header Files\Common\LidarModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\LidarModule\CNeuvSubject.h">
+      <Filter>Header Files\Common\LidarModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\LidarModule\globalLidarCallbackFun.h">
+      <Filter>Header Files\Common\LidarModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\LidarModule\Subject.h">
+      <Filter>Header Files\Common\LidarModule</Filter>
+    </ClInclude>
+    <ClInclude Include="CalibrationProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CalibrationAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NlinfitSolve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NeuLidarCalibration.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="CMainWin.qrc" />
+  </ItemGroup>
+</Project>

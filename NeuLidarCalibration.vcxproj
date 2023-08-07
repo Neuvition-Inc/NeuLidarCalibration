@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{42320E83-2143-3BEF-99D8-44C9E97DFB25}</ProjectGuid>
+    <RootNamespace>untitled1</RootNamespace>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>NeuLidarCalibration</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
+    <OutputDirectory>release\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>MultiByte</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>untitled1</PrimaryOutput>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
+    <OutputDirectory>debug\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>untitled1</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)\Build\Debug</OutDir>
+    <IntDir>debug\</IntDir>
+    <TargetName>untitled1</TargetName>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)build\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\</IntDir>
+    <TargetName>NeuLidarCalibration</TargetName>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)..\..\neusdk\include;$(SolutionDir)..\..\thirdparty\opencv\include;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\Boost\include\boost-1_68;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\VTK\include\vtk-8.1;$(SolutionDir)..\..\thirdparty\curl-7.59.0\include;$(SolutionDir)..\..\thirdparty\glut;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\OpenNI2\Include;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\Qhull\include;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\FLANN\include;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\Eigen\eigen3;$(SolutionDir)..\..\thirdparty\pcl\include\pcl-1.9;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\neusdk\sdk\lib;$(SolutionDir)..\..\thirdparty\opencv\x64\vc15\lib;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\Boost\lib;$(SolutionDir)..\..\thirdparty\glut;$(SolutionDir)..\..\thirdparty\curl-7.59.0\lib;$(SolutionDir)..\..\OpenNI2\Lib;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\VTK\lib;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\Qhull\lib;$(SolutionDir)..\..\thirdparty\pcl\3rdParty\FLANN\lib;$(SolutionDir)..\..\thirdparty\pcl\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <QtInstall>msvc2017_64</QtInstall>
+    <QtModules>core;network;gui;widgets;serialport</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <QtInstall>msvc2017_64</QtInstall>
+    <QtModules>core;network;gui;widgets;serialport</QtModules>
+  </PropertyGroup>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\NlinfitLib\include;$(SolutionDir)\NlinfitLib\matlab\include;release;\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>neuv_win_sdk.lib;opencv_world347.lib;pcl_common_release.lib;pcl_features_release.lib;pcl_filters_release.lib;pcl_io_ply_release.lib;pcl_io_release.lib;pcl_kdtree_release.lib;pcl_keypoints_release.lib;pcl_ml_release.lib;pcl_octree_release.lib;pcl_outofcore_release.lib;pcl_people_release.lib;pcl_recognition_release.lib;pcl_registration_release.lib;pcl_sample_consensus_release.lib;pcl_search_release.lib;pcl_segmentation_release.lib;pcl_stereo_release.lib;pcl_surface_release.lib;pcl_tracking_release.lib;pcl_visualization_release.lib;glut.lib;libcurl_imp.lib;Rpcrt4.lib;opengl32.lib;shell32.lib;vtkalglib-8.1.lib;vtkChartsCore-8.1.lib;vtkCommonColor-8.1.lib;vtkCommonComputationalGeometry-8.1.lib;vtkCommonCore-8.1.lib;vtkCommonDataModel-8.1.lib;vtkCommonExecutionModel-8.1.lib;vtkCommonMath-8.1.lib;vtkCommonMisc-8.1.lib;vtkCommonSystem-8.1.lib;vtkCommonTransforms-8.1.lib;vtkDICOMParser-8.1.lib;vtkDomainsChemistry-8.1.lib;vtkDomainsChemistryOpenGL2-8.1.lib;vtkexoIIc-8.1.lib;vtkexpat-8.1.lib;vtkFiltersAMR-8.1.lib;vtkFiltersCore-8.1.lib;vtkFiltersExtraction-8.1.lib;vtkFiltersFlowPaths-8.1.lib;vtkFiltersGeneral-8.1.lib;vtkFiltersGeneric-8.1.lib;vtkFiltersGeometry-8.1.lib;vtkFiltersHybrid-8.1.lib;vtkFiltersHyperTree-8.1.lib;vtkFiltersImaging-8.1.lib;vtkFiltersModeling-8.1.lib;vtkFiltersParallel-8.1.lib;vtkFiltersParallelImaging-8.1.lib;vtkFiltersPoints-8.1.lib;vtkFiltersProgrammable-8.1.lib;vtkFiltersSelection-8.1.lib;vtkFiltersSMP-8.1.lib;vtkFiltersSources-8.1.lib;vtkFiltersStatistics-8.1.lib;vtkFiltersTexture-8.1.lib;vtkFiltersTopology-8.1.lib;vtkFiltersVerdict-8.1.lib;vtkfreetype-8.1.lib;vtkGeovisCore-8.1.lib;vtkgl2ps-8.1.lib;vtkglew-8.1.lib;vtkGUISupportQt-8.1.lib;vtkGUISupportQtSQL-8.1.lib;vtkhdf5-8.1.lib;vtkhdf5_hl-8.1.lib;vtkImagingColor-8.1.lib;vtkImagingCore-8.1.lib;vtkImagingFourier-8.1.lib;vtkImagingGeneral-8.1.lib;vtkImagingHybrid-8.1.lib;vtkImagingMath-8.1.lib;vtkImagingMorphological-8.1.lib;vtkImagingSources-8.1.lib;vtkImagingStatistics-8.1.lib;vtkImagingStencil-8.1.lib;vtkInfovisCore-8.1.lib;vtkInfovisLayout-8.1.lib;vtkInteractionImage-8.1.lib;vtkInteractionStyle-8.1.lib;vtkInteractionWidgets-8.1.lib;vtkIOAMR-8.1.lib;vtkIOCore-8.1.lib;vtkIOEnSight-8.1.lib;vtkIOExodus-8.1.lib;vtkIOExport-8.1.lib;vtkIOExportOpenGL2-8.1.lib;vtkIOGeometry-8.1.lib;vtkIOImage-8.1.lib;vtkIOImport-8.1.lib;vtkIOInfovis-8.1.lib;vtkIOLegacy-8.1.lib;vtkIOLSDyna-8.1.lib;vtkIOMINC-8.1.lib;vtkIOMovie-8.1.lib;vtkIONetCDF-8.1.lib;vtkIOParallel-8.1.lib;vtkIOParallelXML-8.1.lib;vtkIOPLY-8.1.lib;vtkIOSQL-8.1.lib;vtkIOTecplotTable-8.1.lib;vtkIOVideo-8.1.lib;vtkIOXML-8.1.lib;vtkIOXMLParser-8.1.lib;vtkjpeg-8.1.lib;vtkjsoncpp-8.1.lib;vtklibharu-8.1.lib;vtklibxml2-8.1.lib;vtklz4-8.1.lib;vtkmetaio-8.1.lib;vtkNetCDF-8.1.lib;vtknetcdfcpp-8.1.lib;vtkoggtheora-8.1.lib;vtkParallelCore-8.1.lib;vtkpng-8.1.lib;vtkproj4-8.1.lib;vtkRenderingAnnotation-8.1.lib;vtkRenderingContext2D-8.1.lib;vtkRenderingContextOpenGL2-8.1.lib;vtkRenderingCore-8.1.lib;vtkRenderingFreeType-8.1.lib;vtkRenderingGL2PSOpenGL2-8.1.lib;vtkRenderingImage-8.1.lib;vtkRenderingLabel-8.1.lib;vtkRenderingLOD-8.1.lib;vtkRenderingOpenGL2-8.1.lib;vtkRenderingQt-8.1.lib;vtkRenderingVolume-8.1.lib;vtkRenderingVolumeOpenGL2-8.1.lib;vtksqlite-8.1.lib;vtksys-8.1.lib;vtktiff-8.1.lib;vtkverdict-8.1.lib;vtkViewsContext2D-8.1.lib;vtkViewsCore-8.1.lib;vtkViewsInfovis-8.1.lib;vtkViewsQt-8.1.lib;vtkzlib-8.1.lib;mclmcrrt.lib;libmat.lib;libmx.lib;mclmcr.lib;NlinfitSolve.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\NlinfitLib\matlab\lib\win64\microsoft;$(SolutionDir)\NlinfitLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\NeuLidarCalibration.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_SERIALPORT_LIB;QT_NETWORK_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>E:/lidar/?????????????v1.1/?????/$(Configuration)/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>$(Configuration)</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;debug;\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DEPRECATED_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\untitled1.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DEPRECATED_WARNINGS;QT_WIDGETS_LIB;QT_GUI_LIB;QT_SERIALPORT_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>$(ProjectDir)</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>E:/lidar/?????????????v1.1/?????/$(Configuration)/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>$(Configuration)</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CalibrationAlgorithm.cpp" />
+    <ClCompile Include="CalibrationProcess.cpp" />
+    <ClCompile Include="Common\CGlobalSignalSlot.cpp" />
+    <ClCompile Include="Common\CViewController.cpp" />
+    <ClCompile Include="Common\LidarModule\CLidarINeuvEvent.cpp" />
+    <ClCompile Include="Common\LidarModule\CMatObserver.cpp" />
+    <ClCompile Include="Common\LidarModule\CMatSubject.cpp" />
+    <ClCompile Include="Common\LidarModule\CNeuvLidarControl.cpp" />
+    <ClCompile Include="Common\LidarModule\CNeuvSubject.cpp" />
+    <ClCompile Include="Common\LidarModule\globalLidarCallbackFun.cpp" />
+    <ClCompile Include="Common\LidarModule\lidar_common_defs.cpp" />
+    <ClCompile Include="Common\LidarModule\Subject.cpp" />
+    <ClCompile Include="Common\VTKModule\CPCLPainter.cpp" />
+    <ClCompile Include="Common\VTKModule\CVTKWidget.cpp" />
+    <ClCompile Include="Common\VTKModule\pcl_extern_func.cpp" />
+    <ClCompile Include="MainWin.cpp" />
+    <ClCompile Include="PTZModule\CNeuPTZCore.cpp" />
+    <ClCompile Include="PTZModule\CPTZBaseController.cpp" />
+    <ClCompile Include="PTZModule\CPTZBasePanel.cpp" />
+    <ClCompile Include="PTZModule\CPTZConfig.cpp" />
+    <ClCompile Include="PTZModule\CPTZCore.cpp" />
+    <ClCompile Include="PTZModule\CPTZUdpCore.cpp" />
+    <ClCompile Include="LaserInstrumentControl.cpp" />
+    <ClCompile Include="Neuvition_Auto.cpp" />
+    <ClCompile Include="SerialPort.cpp" />
+    <ClCompile Include="SlideControl.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NlinfitSolve.h" />
+    <ClInclude Include="resource.h" />
+    <QtMoc Include="PTZModule\CNeuPTZCore.h">
+    </QtMoc>
+    <QtMoc Include="PTZModule\CPTZBaseController.h">
+    </QtMoc>
+    <QtMoc Include="PTZModule\CPTZBasePanel.h">
+    </QtMoc>
+    <QtMoc Include="PTZModule\CPTZConfig.h">
+    </QtMoc>
+    <QtMoc Include="PTZModule\CPTZCore.h">
+    </QtMoc>
+    <ClInclude Include="CalibrationAlgorithm.h" />
+    <ClInclude Include="CalibrationProcess.h" />
+    <ClInclude Include="Common\boost_common_defs.h" />
+    <QtMoc Include="Common\CGlobalSignalSlot.h" />
+    <ClInclude Include="Common\CViewController.h" />
+    <ClInclude Include="Common\LidarModule\CLidarINeuvEvent.h" />
+    <ClInclude Include="Common\LidarModule\CMatObserver.h" />
+    <ClInclude Include="Common\LidarModule\CMatSubject.h" />
+    <ClInclude Include="Common\LidarModule\CNeuvLidarControl.h" />
+    <ClInclude Include="Common\LidarModule\CNeuvSubject.h" />
+    <ClInclude Include="Common\LidarModule\globalLidarCallbackFun.h" />
+    <QtMoc Include="Common\LidarModule\lidar_common_defs.h" />
+    <ClInclude Include="Common\LidarModule\Subject.h" />
+    <ClInclude Include="Common\opencv_common_defs.h" />
+    <ClInclude Include="Common\pcl_common_defs.h" />
+    <ClInclude Include="Common\VTKModule\CPCLPainter.h" />
+    <QtMoc Include="Common\VTKModule\CVTKWidget.h" />
+    <ClInclude Include="Common\VTKModule\pcl_extern_func.h" />
+    <QtMoc Include="MainWin.h" />
+    <ClInclude Include="PTZModule\CPTZStateManage.h" />
+    <QtMoc Include="PTZModule\CPTZUdpCore.h">
+    </QtMoc>
+    <QtMoc Include="LaserInstrumentControl.h">
+    </QtMoc>
+    <QtMoc Include="Neuvition_Auto.h">
+    </QtMoc>
+    <QtMoc Include="SerialPort.h">
+    </QtMoc>
+    <QtMoc Include="SlideControl.h">
+    </QtMoc>
+    <QtMoc Include="test.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -Zi -MDd -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_predefs.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_predefs.h;%(Outputs)</Outputs>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Common\VTKModule\CVTKWidget.ui" />
+    <QtUic Include="MainWin.ui" />
+    <QtUic Include="test.ui">
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NeuLidarCalibration.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="CMainWin.qrc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

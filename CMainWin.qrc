@@ -1,0 +1,58 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>res/logo500_blue.png</file>
+        <file>res/logo500_white.png</file>
+        <file>res/dropdown.png</file>
+        <file>res/title_bg.jpg</file>
+        <file>res/logo500.png</file>
+        <file>res/icon_pcd.png</file>
+        <file>res/icon_pcz.png</file>
+        <file>res/icon_recording.png</file>
+        <file>res/icon_recording_stop.png</file>
+        <file>res/icon_help.png</file>
+        <file>res/icon_close.png</file>
+        <file>res/icon_minus.png</file>
+        <file>res/icon_max.png</file>
+        <file>res/icon_max_r.png</file>
+        <file>res/icon_connect_hover.png</file>
+        <file>res/icon_connect_nor.png</file>
+        <file>res/icon_connect_pressed.png</file>
+        <file>res/icon_connected.png</file>
+        <file>res/icon_connected_hover.png</file>
+        <file>res/icon_connected_pressed.png</file>
+        <file>res/bg_connecting.png</file>
+        <file>res/+.png</file>
+        <file>res/background.png</file>
+        <file>res/close.png</file>
+        <file>res/down.png</file>
+        <file>res/ellipse.png</file>
+        <file>res/p71.png</file>
+        <file>res/p72.png</file>
+        <file>res/p73.png</file>
+        <file>res/p74.png</file>
+        <file>res/polygon.png</file>
+        <file>res/rectangle.png</file>
+        <file>res/Neu Ruler.png</file>
+        <file>res/p7.png</file>
+        <file>res/p74-2x.png</file>
+        <file>res/extend.png</file>
+        <file>res/tini.png</file>
+        <file>res/change.png</file>
+        <file>res/model.png</file>
+        <file>res/set.png</file>
+        <file>res/8.png</file>
+        <file>res/list.png</file>
+        <file>res/move.png</file>
+        <file>res/6.png</file>
+        <file>res/82.png</file>
+        <file>res/background.jpg</file>
+        <file>res/car.png</file>
+        <file>res/PCD.png</file>
+        <file>res/PCZ.png</file>
+        <file>res/set2x.png</file>
+        <file>res/分期－提示.png</file>
+        <file>res/箭头_下一页_o 拷贝.png</file>
+        <file>res/设置.png</file>
+        <file>res/111.png</file>
+    </qresource>
+</RCC>
